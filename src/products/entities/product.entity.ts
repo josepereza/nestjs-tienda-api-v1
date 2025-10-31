@@ -18,7 +18,6 @@ export class Product {
   // eager: true -> las imágenes se cargarán automáticamente al obtener el producto
   @OneToMany(() => ProductImage, (image) => image.product, {
     cascade: true,
-    eager: true,
   })
   images: ProductImage[];
 }

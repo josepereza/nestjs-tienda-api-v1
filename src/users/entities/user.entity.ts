@@ -4,10 +4,10 @@ import { Order } from '../../orders/entities/order.entity';
 @Entity()
 export class User {
   @PrimaryGeneratedColumn()
-  id: number;
+  userId: number;
 
   @Column({ unique: true })
-  email: string;
+  username: string;
 
   @Column()
   password?: string; // hashed
@@ -16,6 +16,6 @@ export class User {
   name?: string;
 
   // relaciones (lazy) - cargar orders solo cuando se necesita
-  @OneToMany(() => Order, (order) => order.user, { lazy: true })
-  orders: Promise<Order[]>;
+  @OneToMany(() => Order, (order) => order.user)
+  orders: Order[];
 }

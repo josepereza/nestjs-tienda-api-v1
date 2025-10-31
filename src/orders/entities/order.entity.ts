@@ -22,14 +22,10 @@ export class Order {
   total: number;
 
   // Relación con usuario
-  @ManyToOne(() => User, (user) => user.orders, { eager: true })
-  @JoinColumn({ name: 'user_id' })
+  @ManyToOne(() => User, (user) => user.orders)
   user: User;
 
   // Relación con líneas del pedido
-  @OneToMany(() => OrderLine, (line) => line.order, {
-    cascade: true,
-    lazy: true, // carga diferida
-  })
-  lines: Promise<OrderLine[]>;
+  @OneToMany(() => OrderLine, (line) => line.order)
+  lines: OrderLine[];
 }

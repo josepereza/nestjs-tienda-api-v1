@@ -16,12 +16,12 @@ export class UsersService {
     return this.usersRepo.save(user);
   }
 
-  findByEmail(email: string) {
-    return this.usersRepo.findOne({ where: { email } });
+  findByEmail(username: string) {
+    return this.usersRepo.findOne({ where: { username } });
   }
 
-  findOne(id: number) {
-    return this.usersRepo.findOne({ where: { id } });
+  findOne(userId: number) {
+    return this.usersRepo.findOne({ where: { userId } });
   }
   findAll() {
     return this.usersRepo.find();

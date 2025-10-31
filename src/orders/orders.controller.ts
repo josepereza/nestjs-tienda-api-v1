@@ -8,9 +8,9 @@ import {
   Request,
 } from '@nestjs/common';
 import { OrdersService } from './orders.service';
-import { CreateOrderDto } from './dto/create-order.dto';
 import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 import { User } from 'src/users/entities/user.entity';
+import { CreateOrderDto } from './dto/create-order.dto';
 
 @Controller('orders')
 export class OrdersController {
@@ -19,11 +19,11 @@ export class OrdersController {
   // 🧾 Crear un nuevo pedido
   @UseGuards(JwtAuthGuard)
   @Post()
-  async create(
+  async createOrder(
     @Body() dto: CreateOrderDto,
     @Request() req: Request & { user: User },
   ) {
-    return this.ordersService.create(dto, req.user);
+    return this.ordersService.createOrder(dto, req.user);
   }
 
   // 📋 Listar todos los pedidos (admin)

@@ -25,6 +25,7 @@ export class ProductsController {
   @Post()
   @UseGuards(JwtAuthGuard)
   create(@Body() dto: CreateProductDto) {
+    console.log('en controller', dto)
     return this.productsService.create(dto);
   }
 

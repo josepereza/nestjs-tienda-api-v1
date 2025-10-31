@@ -15,6 +15,7 @@ export class ProductsService {
   ) {}
 
   create(dto: CreateProductDto) {
+    console.log(dto)
     const p = this.productsRepo.create(dto);
     return this.productsRepo.save(p);
   }

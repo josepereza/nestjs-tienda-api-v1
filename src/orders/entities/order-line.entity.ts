@@ -23,17 +23,12 @@ export class OrderLine {
   price: number;
 
   // Relación con el producto (N líneas pueden apuntar al mismo producto)
-  @ManyToOne(() => Product, (product) => product.id, {
-    eager: true, // cargamos automáticamente el producto al consultar la línea
-  })
-  @JoinColumn({ name: 'product_id' })
+  @ManyToOne(() => Product, (product) => product.id)
   product: Product;
 
   // Relación con el pedido padre
   @ManyToOne(() => Order, (order) => order.lines, {
     onDelete: 'CASCADE',
-    lazy: true, // carga diferida del pedido
   })
-  @JoinColumn({ name: 'order_id' })
   order: Order;
 }
