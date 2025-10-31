@@ -42,4 +42,12 @@ export class OrdersController {
     const lines = await this.ordersService.getLines(order);
     return { ...order, lines };
   }
+
+  @Get()
+  @UseGuards(JwtAuthGuard) // opcional, si quieres que solo el usuario vea sus pedidos
+  async getOrders(@Request() req) {
+    const user = req.user;
+    // Si quieres solo los pedidos del usuario logueado
+    return this.ordersService.findOrdersByUser(user.id);
+  }
 }

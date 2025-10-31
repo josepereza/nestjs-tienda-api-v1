@@ -64,12 +64,21 @@ export class OrdersService {
   }
 
   async findOne(id: number) {
-    const order = await this.orderRepository.findOne({ where: { id },
+    const order = await this.orderRepository.findOne({
+      where: { id },
       relations: ['lines', 'lines.product', 'user'],
       order: { createdAt: 'DESC' }, // opcional: para ordenar por fecha});
     });
     if (!order) throw new NotFoundException('Pedido no encontrado');
     return order;
+  }
+
+  async findOrdersByUser(userId: number): Promise<Order[]> {
+    return this.orderRepository.find({
+      where: { user: { userId: userId } },
+      relations: ['lines', 'lines.product', 'user'],
+      order: { createdAt: 'DESC' },
+    });
   }
 
   // Cargar líneas (lazy)
