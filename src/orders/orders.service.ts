@@ -20,7 +20,7 @@ export class OrdersService {
 
   async createOrder(createOrderDto: CreateOrderDto, user: User) {
     // Crear la orden base
-    console.log('en ordeService', user)
+    console.log('en ordeService', user);
     const order = this.orderRepository.create({ user, total: 0 });
     const savedOrder = await this.orderRepository.save(order);
 
@@ -56,8 +56,11 @@ export class OrdersService {
     });
   }
 
-  async findAll() {
-    return this.orderRepository.find();
+  async findAllOrders(): Promise<Order[]> {
+    return this.orderRepository.find({
+      relations: ['lines', 'lines.product', 'user'],
+      order: { createdAt: 'DESC' }, // opcional: para ordenar por fecha
+    });
   }
 
   async findOne(id: number) {

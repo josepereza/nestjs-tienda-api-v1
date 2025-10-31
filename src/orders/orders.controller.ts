@@ -29,9 +29,9 @@ export class OrdersController {
   // 📋 Listar todos los pedidos (admin)
   @UseGuards(JwtAuthGuard)
   @Get()
-  async findAll(@Request() req: Request & { user: User }) {
+  async findAllOrders(@Request() req: Request & { user: User }) {
     console.log('Mi usuario es :', req.user);
-    return this.ordersService.findAll();
+    return this.ordersService.findAllOrders();
   }
 
   // 🔍 Obtener pedido con sus líneas
